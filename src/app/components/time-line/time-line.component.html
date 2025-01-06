@@ -3,9 +3,11 @@
     <div class="line"></div>
 
     @for (marker of markers(); track marker) {
-    <div class="marker" [style.left]="(marker / max()) * 100 + '%'">
-      {{ marker | number: '' : 'de-DE' }}
-    </div>
+    <div
+      class="marker"
+      [style.left]="(marker / max()) * 100 + '%'"
+      [attr.marker-value]="marker | number : '' : 'de-DE'"
+    ></div>
     }
   </div>
 </div>

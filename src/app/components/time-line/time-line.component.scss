@@ -2,8 +2,7 @@ $baseSize: 12px;
 $lineHeight: 2px;
 
 .time-line-container {
-    padding: 3vw;
-    height: calc(3 * $baseSize + 2em + $lineHeight);
+    padding: 5vw;
 
     .time-line {
         position: relative;
@@ -11,8 +10,6 @@ $lineHeight: 2px;
         height: 100%;
 
         .line {
-            width: 100%;
-
             &::after {
                 position: absolute;
                 content: "";
@@ -26,15 +23,16 @@ $lineHeight: 2px;
 
         .marker {
             position: absolute;
-            top: calc(3 * $baseSize + $lineHeight);
+            top: 0;
+            width: 1px;
+            height: calc(2 * $baseSize + $lineHeight);
+            background-color: black;
 
             &::before {
                 position: absolute;
-                content: "";
-                top: calc(-3 * $baseSize - $lineHeight);
-                width: 1px;
-                height: calc(2 * $baseSize + $lineHeight);
-                background-color: black;
+                content: attr(marker-value);
+                top: calc(3 * $baseSize - $lineHeight);
+                translate: -50%;
             }
         }
     }
