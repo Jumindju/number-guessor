@@ -3,9 +3,16 @@
     {{ t("title") }}
   </h1>
 
-  <app-time-line 
+  <app-time-line
     [min]="0"
-    [max]="100000"
+    [max]="100"
+    [markerCount]="5"
+    [indicatorPerMarker]="10"
+  />
+  <app-time-line
+    [min]="0"
+    [max]="1000000"
     [markerCount]="10"
+    [indicatorPerMarker]="10"
   />
 </div>

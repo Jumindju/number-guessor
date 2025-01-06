@@ -1,5 +1,6 @@
 $baseSize: 12px;
 $lineHeight: 2px;
+$markerHeight: 2 * $baseSize + $lineHeight;
 
 .time-line-container {
     padding: 5vw;
@@ -7,7 +8,7 @@ $lineHeight: 2px;
     .time-line {
         position: relative;
         width: 100%;
-        height: 100%;
+        height: $markerHeight;
 
         .line {
             &::after {
@@ -25,14 +26,27 @@ $lineHeight: 2px;
             position: absolute;
             top: 0;
             width: 1px;
-            height: calc(2 * $baseSize + $lineHeight);
+            height: calc($markerHeight);
             background-color: black;
 
-            &::before {
+            &::after {
                 position: absolute;
                 content: attr(marker-value);
-                top: calc(3 * $baseSize - $lineHeight);
+                top: calc($markerHeight + $baseSize);
                 translate: -50%;
+            }
+        }
+
+        .indicator {
+            position: absolute;
+            width: 1px;
+            height: $baseSize;
+            top: calc(($markerHeight - $baseSize) / 2);
+            background-color: black;
+
+            &-highlighted {
+                height: calc($baseSize * 1.5);
+                top: calc(($markerHeight - (1.5 * $baseSize)) / 2);
             }
         }
     }

@@ -9,5 +9,14 @@
       [attr.marker-value]="marker | number : '' : 'de-DE'"
     ></div>
     }
+
+    @for (indicator of indicators(); track indicator; let i = $index) {
+        <div
+             class="indicator" 
+             [class.indicator-highlighted]="i % (indicatorPerMarker()! - 1) === indicatorMid()"
+             [style.left]="indicator + '%'"
+        ></div>
+    }
+
   </div>
 </div>
