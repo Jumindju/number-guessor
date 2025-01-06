@@ -1,0 +1,11 @@
+<div class="page" *transloco="let t; prefix: 'timeline'">
+  <h1>
+    {{ t("title") }}
+  </h1>
+
+  <app-time-line 
+    [min]="0"
+    [max]="100000"
+    [markerCount]="10"
+  />
+</div>

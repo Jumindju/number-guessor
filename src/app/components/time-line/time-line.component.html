@@ -1,0 +1,11 @@
+<div class="time-line-container">
+  <div class="time-line">
+    <div class="line"></div>
+
+    @for (marker of markers(); track marker) {
+    <div class="marker" [style.left]="(marker / max()) * 100 + '%'">
+      {{ marker | number: '' : 'de-DE' }}
+    </div>
+    }
+  </div>
+</div>
