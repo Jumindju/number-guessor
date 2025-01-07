@@ -1,6 +1,6 @@
 @use 'styles/fonts.scss';
 
-html {
+* {
     font-family: 'GrundschriftRegular';
     font-weight: normal;
     font-style: normal;
@@ -8,12 +8,15 @@ html {
 
 html, body {
     margin: 0;
+    height: 100vh;
 }
 
 .page {
     display: flex;
     flex-direction: column;
-    height: 100%;
     width: calc(100% - 2vw);
     margin: 2vw;
+    flex: 1;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

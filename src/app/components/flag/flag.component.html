@@ -1,0 +1,8 @@
+<div class="flag-wrapper" [style.width]="sizePx() + 'px'" [style.height]="sizePx() + 'px'">
+    <img class="flag-image" src="assets/flag.svg" alt="flag" />
+    @if (content()) {
+        <span class="flag-text">
+            {{ content() }}
+        </span>
+    }
+</div>

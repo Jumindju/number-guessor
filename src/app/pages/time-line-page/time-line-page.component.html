@@ -3,16 +3,17 @@
     {{ t("title") }}
   </h1>
 
-  <app-time-line
-    [min]="0"
-    [max]="100"
-    [markerCount]="5"
-    [indicatorPerMarker]="10"
-  />
-  <app-time-line
-    [min]="0"
-    [max]="1000000"
-    [markerCount]="10"
-    [indicatorPerMarker]="10"
-  />
+  <div class="game-box">
+    <app-time-line
+      [min]="minValue()"
+      [max]="maxValue()"
+      [markerCount]="10"
+      [indicatorPerMarker]="10"
+    />
+
+    <app-number-input
+      [min]="minValue()"
+      [max]="maxValue()"
+     />
+  </div>
 </div>

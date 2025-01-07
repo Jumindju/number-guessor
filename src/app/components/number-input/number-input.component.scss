@@ -1,0 +1,11 @@
+.number-input-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 1em;
+
+    .confirm-button {
+        color: #077a07;
+    }
+}

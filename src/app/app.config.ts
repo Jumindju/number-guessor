@@ -1,10 +1,11 @@
 import {
   ApplicationConfig,
+  importProvidersFrom,
   isDevMode,
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
-
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { routes } from './app.routes';
 import { provideTransloco } from '@jsverse/transloco';
 import { provideHttpClient } from '@angular/common/http';
@@ -20,6 +21,7 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideHttpClient(),
+    provideAnimations(),
     provideTransloco({
       config: {
         availableLangs: ['de'],
