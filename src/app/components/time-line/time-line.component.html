@@ -1,5 +1,5 @@
 <div class="time-line-container">
-  <div class="time-line">
+  <div class="time-line" (click)="timelineClicked($event)">
     <div class="line"></div>
 
     @for (marker of markers(); track marker) {

@@ -1,5 +1,12 @@
 import { DecimalPipe } from '@angular/common';
-import { Component, computed, effect, input, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  effect,
+  input,
+  output,
+  signal,
+} from '@angular/core';
 
 @Component({
   selector: 'app-time-line',
@@ -10,15 +17,19 @@ import { Component, computed, effect, input, signal } from '@angular/core';
 export class TimeLineComponent {
   min = input.required<number>();
   max = input.required<number>();
+  timelineEnabled = input<boolean>(false);
+
   markerCount = input<number>();
   indicatorPerMarker = input<number>();
   indicatorMid = computed(() => {
     const indicatorPerMarker = this.indicatorPerMarker() ?? 0;
-    return (indicatorPerMarker / 2) - 1;
+    return indicatorPerMarker / 2 - 1;
   });
 
   markers = signal<number[]>([]);
   indicators = signal<number[]>([]);
+
+  numberSelected = output<number>();
 
   constructor() {
     effect(() => {
@@ -51,5 +62,27 @@ export class TimeLineComponent {
       this.markers.set(newMarkers);
       this.indicators.set(newIndicators);
     });
+  }
+
+  timelineClicked(clickEvent: MouseEvent) {
+    if (!this.timelineEnabled()) {
+      return;
+    }
+
+    const timeLineElement = <HTMLDivElement>clickEvent.currentTarget;
+    const timeLineOffsetLeft = timeLineElement.offsetLeft;
+    const clickEventOffsetLeft = clickEvent.clientX;
+
+    const clickOnTimeLine =
+      clickEventOffsetLeft - timeLineOffsetLeft;
+    
+    const timeLineWidth = timeLineElement.clientWidth;
+
+    const clickPercent = clickOnTimeLine / timeLineWidth;
+    const clickedValue = this.max() * clickPercent;
+
+    const fixedValue = Math.max(Math.min(clickedValue, this.max()), this.min());
+
+    this.numberSelected.emit(fixedValue);
   }
 }

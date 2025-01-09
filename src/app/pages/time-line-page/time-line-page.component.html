@@ -15,16 +15,19 @@
           })
         }}
 
-        <app-flag 
+        <app-flag
           [sizePx]="90"
           [content]="currentNumber()"
+          [class.number-display-hidden]="currentGuess() !== null"
         />
       </div>
       <app-time-line
         [min]="minValue()"
         [max]="maxValue()"
+        [timelineEnabled]="currentNumber() !== null"
         [markerCount]="10"
         [indicatorPerMarker]="10"
+        (numberSelected)="numberSelected($event)"
       />
     </div>
 

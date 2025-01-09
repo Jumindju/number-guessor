@@ -12,7 +12,7 @@ import { DecimalPipe } from '@angular/common';
     TimeLineComponent,
     FlagComponent,
     NumberInputComponent,
-    DecimalPipe
+    DecimalPipe,
   ],
   templateUrl: './time-line-page.component.html',
   styleUrl: './time-line-page.component.scss',
@@ -26,5 +26,9 @@ export class TimeLinePageComponent {
 
   onNumberEntered(newNumber: number) {
     this.currentNumber.set(newNumber);
+  }
+
+  numberSelected(selectedNumber: number) {
+   this.currentGuess.set(selectedNumber);
   }
 }
