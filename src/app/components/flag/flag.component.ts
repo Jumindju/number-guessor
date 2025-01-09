@@ -9,5 +9,5 @@ import { Component, input } from '@angular/core';
 export class FlagComponent {
   sizePx = input<number>(30);
 
-  content = input<number>();
+  content = input<number | string | null>();
 }

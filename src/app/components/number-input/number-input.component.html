@@ -1,19 +1,20 @@
-<div class="number-input-wrapper">
-  <mat-form-field>
-    <mat-label>Deine Zahl</mat-label>
-    <input matInput type="text" [(ngModel)]="value" />
-    <!-- <button matSuffix mat-icon-button (click)="randomNumber()">
-      <mat-icon>casino</mat-icon>
-    </button> -->
-    <app-flag matSuffix [sizePx]="24" />
-  </mat-form-field>
+@if(form){
+<div class="number-input-wrapper" *transloco="let t; prefix: 'numberInput'">
+  <form [formGroup]="form">
+    <mat-form-field appearance="outline" [subscriptSizing]="'dynamic'">
+      <mat-label>{{ t("placeholder") }}</mat-label>
+      <input matInput type="number" formControlName="number" />
+      <app-flag matSuffix [sizePx]="24" />
+    </mat-form-field>
+  </form>
 
   <button
     mat-icon-button
-    [disabled]="value() === null"
-    (click)="onConfirm.emit(value()!)"
-    class="confirm-button"
+    [disabled]="form.invalid"
+    (click)="onConfirm.emit(form.value.number ?? 0)"
+    [class.confirm-valid]="form.valid"
   >
     <mat-icon>check</mat-icon>
   </button>
 </div>
+}

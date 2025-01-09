@@ -1,19 +1,40 @@
-<div class="page" *transloco="let t; prefix: 'timeline'">
+<div class="page" *transloco="let t">
   <h1>
     {{ t("title") }}
   </h1>
 
   <div class="game-box">
-    <app-time-line
-      [min]="minValue()"
-      [max]="maxValue()"
-      [markerCount]="10"
-      [indicatorPerMarker]="10"
-    />
+    <div>
+      <div
+        class="number-display"
+        [class.number-display-hidden]="currentNumber() === null"
+      >
+        {{
+          t("numberHint", {
+            number: currentNumber() | number : "1.0-0"
+          })
+        }}
 
+        <app-flag 
+          [sizePx]="90"
+          [content]="currentNumber()"
+        />
+      </div>
+      <app-time-line
+        [min]="minValue()"
+        [max]="maxValue()"
+        [markerCount]="10"
+        [indicatorPerMarker]="10"
+      />
+    </div>
+
+    @if(currentNumber() === null){
     <app-number-input
       [min]="minValue()"
       [max]="maxValue()"
-     />
+      (onConfirm)="onNumberEntered($event)"
+      class="number-input"
+    />
+    }
   </div>
 </div>

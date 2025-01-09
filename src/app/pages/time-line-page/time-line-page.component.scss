@@ -4,9 +4,24 @@
 }
 
 .game-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
     flex: 1;
-    gap: 5em;
+}
+
+.number-display {
+    display: flex;
+    gap: 0.5em;
+    justify-content: center;
+    align-items: flex-end;
+    width: 100%;
+    text-align: center;
+    margin-top: 20%;
+    font-size: 1.4em;
+
+    &-hidden {
+        visibility: hidden;
+    }
+}
+
+.number-input {
+    margin-top: 5em;
 }

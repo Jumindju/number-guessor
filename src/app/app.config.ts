@@ -2,6 +2,7 @@ import {
   ApplicationConfig,
   importProvidersFrom,
   isDevMode,
+  LOCALE_ID,
   provideZoneChangeDetection,
 } from '@angular/core';
 import { provideRouter } from '@angular/router';
@@ -34,5 +35,9 @@ export const appConfig: ApplicationConfig = {
       },
       loader: TranslocoHttpLoader,
     }),
+    {
+      provide: LOCALE_ID,
+      useValue: 'de-DE'
+    }
   ],
 };

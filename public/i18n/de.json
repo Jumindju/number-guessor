@@ -1,5 +1,7 @@
 {
-    "timeline": {
-        "title": "Zeitleiste"
+    "title": "Zeitleiste",
+    "numberHint": "Suche {{number}}",
+    "numberInput": {
+        "placeholder": "Deine Zahl"
     }
 }

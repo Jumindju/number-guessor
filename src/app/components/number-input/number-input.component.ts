@@ -1,10 +1,26 @@
-import { Component, EventEmitter, input, signal } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  inject,
+  input,
+  OnInit,
+  output,
+} from '@angular/core';
 import { MatInput, MatLabel, MatSuffix } from '@angular/material/input';
 import { MatIcon } from '@angular/material/icon';
-import { FormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormControlDirective,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatIconButton } from '@angular/material/button';
 import { MatFormField } from '@angular/material/form-field';
-import { FlagComponent } from "../flag/flag.component";
+import { FlagComponent } from '../flag/flag.component';
+import { TranslocoDirective } from '@jsverse/transloco';
 
 @Component({
   selector: 'app-number-input',
@@ -16,23 +32,30 @@ import { FlagComponent } from "../flag/flag.component";
     MatFormField,
     MatSuffix,
     MatIconButton,
-    FlagComponent
-],
+    FlagComponent,
+    TranslocoDirective,
+    ReactiveFormsModule,
+  ],
   templateUrl: './number-input.component.html',
   styleUrl: './number-input.component.scss',
 })
-export class NumberInputComponent {
-  value = signal<number | null>(null);
+export class NumberInputComponent implements OnInit {
+  formBuilder = inject(FormBuilder);
 
   min = input.required<number>();
   max = input.required<number>();
 
-  onConfirm = new EventEmitter<number>();
+  onConfirm = output<number>();
 
-  randomNumber() {
-    const randomInt =
-      Math.floor(Math.random() * (this.max() - this.min() + 1)) + this.min();
+  form?: FormGroup;
 
-    this.value.set(randomInt);
+  ngOnInit(): void {
+    this.form = this.formBuilder.group({
+      number: new FormControl(null, [
+        Validators.required,
+        Validators.min(this.min()),
+        Validators.max(this.max()),
+      ]),
+    });
   }
 }
