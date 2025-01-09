@@ -14,6 +14,7 @@ import {
 import { FlagComponent } from '../../components/flag/flag.component';
 import { NumberInputComponent } from '../../components/number-input/number-input.component';
 import { DecimalPipe } from '@angular/common';
+import { MatButton } from '@angular/material/button';
 
 @Component({
   selector: 'app-time-line-page',
@@ -23,6 +24,7 @@ import { DecimalPipe } from '@angular/common';
     FlagComponent,
     NumberInputComponent,
     DecimalPipe,
+    MatButton,
   ],
   templateUrl: './time-line-page.component.html',
   styleUrl: './time-line-page.component.scss',
@@ -34,20 +36,14 @@ export class TimeLinePageComponent {
   currentNumber = signal<number | null>(null);
   currentGuess = signal<number | null>(null);
   timeLineWidth = signal<number | null>(null);
+  showResult = signal<boolean>(false);
 
-  currentGuessOffset = computed(() => {
-    const currentGuess = this.currentGuess();
-    const timeLineWidth = this.timeLineWidth();
-
-    if (!currentGuess || !timeLineWidth) {
-      return 0;
-    }
-
-    const guessInPercent = currentGuess / this.maxValue();
-
-    console.log(guessInPercent, timeLineWidth, currentGuess);
-    return timeLineWidth * guessInPercent;
-  });
+  currentGuessOffset = computed(() =>
+    this.totalNumberInOffset(this.currentGuess())
+  );
+  currentNumberOffset = computed(() =>
+    this.totalNumberInOffset(this.currentNumber())
+  );
 
   onNumberEntered(newNumber: number) {
     this.currentNumber.set(newNumber);
@@ -56,5 +52,23 @@ export class TimeLinePageComponent {
   guessSelected({ selectedNumber, timeLineWidth }: TimeLineNumberEvent) {
     this.currentGuess.set(selectedNumber);
     this.timeLineWidth.set(timeLineWidth);
+  }
+
+  reset() {
+    this.currentNumber.set(null);
+    this.currentGuess.set(null);
+    this.showResult.set(false);
+  }
+
+  private totalNumberInOffset(value: number | null) {
+    const timeLineWidth = this.timeLineWidth();
+
+    if (!value || !timeLineWidth) {
+      return 0;
+    }
+
+    const guessInPercent = value / this.maxValue();
+
+    return timeLineWidth * guessInPercent;
   }
 }

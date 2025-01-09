@@ -17,4 +17,10 @@
     top: 22%;
     left: 24%;
   }
+
+  .flag-color-green {
+    filter: invert(32%) sepia(85%) saturate(1857%) hue-rotate(96deg)
+      brightness(93%) contrast(92%);
+    color: #0a960a;
+  }
 }

@@ -26,12 +26,20 @@
   position: relative;
   margin: 120px 5em 5em;
 
-  .user-guess-flag {
+  .guess-flag {
     position: absolute;
     top: -90px;
+
+    &-user {
+      background-color: white;
+    }
   }
 }
 
 .number-input {
   margin-top: 5em;
+}
+
+.resolve-button {
+  text-align: center;
 }

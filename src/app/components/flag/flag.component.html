@@ -1,8 +1,17 @@
-<div class="flag-wrapper" [style.width]="sizePx() * 0.72 + 'px'" [style.height]="sizePx() + 'px'">
-    <img class="flag-image" src="assets/flag.svg" alt="flag" />
-    @if (content()) {
-        <span class="flag-text">
-            {{ content() }}
-        </span>
-    }
+<div
+  class="flag-wrapper"
+  [style.width]="sizePx() * 0.72 + 'px'"
+  [style.height]="sizePx() + 'px'"
+>
+  <img
+    class="flag-image"
+    src="assets/flag.svg"
+    alt="flag"
+    [class.flag-color-green]="flagColor() === 'green'"
+  />
+  @if (content()) {
+  <span class="flag-text">
+    {{ content() }}
+  </span>
+  }
 </div>
