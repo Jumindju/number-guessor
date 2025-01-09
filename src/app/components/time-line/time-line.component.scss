@@ -31,7 +31,7 @@ $markerHeight: 2 * $baseSize + $lineHeight;
       content: attr(marker-value);
       top: calc($markerHeight + $baseSize);
       translate: -50%;
-      font-size: 1em;
+      font-size: 1.4vw;
     }
   }
 

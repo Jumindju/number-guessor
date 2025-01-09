@@ -1,22 +1,22 @@
-@use 'styles/fonts.scss';
+@use "styles/fonts.scss";
 
 * {
-    font-family: 'GrundschriftRegular';
-    font-weight: normal;
-    font-style: normal;
+  font-family: "GrundschriftRegular";
+  font-weight: normal;
+  font-style: normal;
 }
 
-html, body {
-    margin: 0;
-    height: 100vh;
+html,
+body {
+  margin: 0;
+  height: 100vh;
 }
 
-.page {
-    display: flex;
-    flex-direction: column;
-    width: calc(100% - 2vw);
-    margin: 2vw;
-    flex: 1;
+html,
+body {
+  height: 100%;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}

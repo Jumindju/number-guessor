@@ -4,6 +4,16 @@
 }
 
 .game-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 120px;
+  width: 100%;
+  flex: 1;
+}
+
+.number-display,
+.action-wrapper {
   flex: 1;
 }
 
@@ -14,7 +24,6 @@
   align-items: flex-end;
   width: 100%;
   text-align: center;
-  margin-top: 20vh;
   font-size: 1.4em;
 
   &-hidden {
@@ -24,7 +33,8 @@
 
 .time-line-wrapper {
   position: relative;
-  margin: 120px 5em 5em;
+  margin: 0 5vw;
+  flex: 0;
 
   .guess-flag {
     position: absolute;

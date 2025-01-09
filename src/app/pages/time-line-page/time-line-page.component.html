@@ -1,55 +1,43 @@
-<div class="page" *transloco="let t">
-  <h1>
-    {{ t("title") }}
-  </h1>
+<div class="game-box" *transloco="let t">
+  <div
+    class="number-display"
+    [class.number-display-hidden]="currentNumber() === null"
+  >
+    {{
+      t("numberHint", {
+        number: currentNumber() | number : "1.0-0"
+      })
+    }}
+  </div>
 
-  <div class="game-box">
-    <div>
-      <div
-        class="number-display"
-        [class.number-display-hidden]="currentNumber() === null"
-      >
-        {{
-          t("numberHint", {
-            number: currentNumber() | number : "1.0-0"
-          })
-        }}
+  <div class="time-line-wrapper">
+    <app-time-line
+      [min]="minValue()"
+      [max]="maxValue()"
+      [timelineEnabled]="currentNumber() !== null && !showResult()"
+      [markerCount]="10"
+      [indicatorPerMarker]="10"
+      (numberSelected)="guessSelected($event)"
+    />
 
-        <app-flag
-          [sizePx]="90"
-          [content]="currentNumber()"
-          [class.number-display-hidden]="currentGuess() !== null"
-        />
-      </div>
+    @if (currentGuess() !== null) { @if (showResult()) {
+    <app-flag
+      [sizePx]="90"
+      [content]="currentNumber() | number : '1.0-0'"
+      [flagColor]="'green'"
+      class="guess-flag"
+      [style.left]="currentNumberOffset() - 2.5 + 'px'"
+    />
+    }
+    <app-flag
+      [sizePx]="90"
+      [content]="(showResult() ? currentGuess() : '') | number : '1.0-0'"
+      class="guess-flag guess-flag-user"
+      [style.left]="currentGuessOffset() - 2.5 + 'px'"
+    />}
+  </div>
 
-      <div class="time-line-wrapper">
-        <app-time-line
-          [min]="minValue()"
-          [max]="maxValue()"
-          [timelineEnabled]="currentNumber() !== null"
-          [markerCount]="10"
-          [indicatorPerMarker]="10"
-          (numberSelected)="guessSelected($event)"
-        />
-
-        @if (currentGuess() !== null) { @if (showResult()) {
-        <app-flag
-          [sizePx]="90"
-          [content]="currentNumber() | number : '1.0-0'"
-          [flagColor]="'green'"
-          class="guess-flag"
-          [style.left]="currentNumberOffset() - 2.5 + 'px'"
-        />
-        }
-        <app-flag
-          [sizePx]="90"
-          [content]="(showResult() ? currentGuess() : '') | number : '1.0-0'"
-          class="guess-flag guess-flag-user"
-          [style.left]="currentGuessOffset() - 2.5 + 'px'"
-        />}
-      </div>
-    </div>
-
+  <div class="action-wrapper">
     @if(currentNumber() === null){
     <app-number-input
       [min]="minValue()"
