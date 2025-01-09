@@ -1,0 +1,8 @@
+{
+    "numberHint": "Suche {{number}}",
+    "solve": "Auflösen",
+    "reset": "Erneut spielen",
+    "numberInput": {
+        "placeholder": "Deine Zahl"
+    }
+}
