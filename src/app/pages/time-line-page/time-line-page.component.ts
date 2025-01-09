@@ -1,6 +1,16 @@
-import { Component, signal } from '@angular/core';
+import {
+  Component,
+  computed,
+  contentChild,
+  ElementRef,
+  signal,
+  viewChild,
+} from '@angular/core';
 import { TranslocoDirective, TranslocoPipe } from '@jsverse/transloco';
-import { TimeLineComponent } from '../../components/time-line/time-line.component';
+import {
+  TimeLineComponent,
+  TimeLineNumberEvent,
+} from '../../components/time-line/time-line.component';
 import { FlagComponent } from '../../components/flag/flag.component';
 import { NumberInputComponent } from '../../components/number-input/number-input.component';
 import { DecimalPipe } from '@angular/common';
@@ -23,12 +33,28 @@ export class TimeLinePageComponent {
 
   currentNumber = signal<number | null>(null);
   currentGuess = signal<number | null>(null);
+  timeLineWidth = signal<number | null>(null);
+
+  currentGuessOffset = computed(() => {
+    const currentGuess = this.currentGuess();
+    const timeLineWidth = this.timeLineWidth();
+
+    if (!currentGuess || !timeLineWidth) {
+      return 0;
+    }
+
+    const guessInPercent = currentGuess / this.maxValue();
+
+    console.log(guessInPercent, timeLineWidth, currentGuess);
+    return timeLineWidth * guessInPercent;
+  });
 
   onNumberEntered(newNumber: number) {
     this.currentNumber.set(newNumber);
   }
 
-  numberSelected(selectedNumber: number) {
-   this.currentGuess.set(selectedNumber);
+  guessSelected({ selectedNumber, timeLineWidth }: TimeLineNumberEvent) {
+    this.currentGuess.set(selectedNumber);
+    this.timeLineWidth.set(timeLineWidth);
   }
 }

@@ -3,10 +3,17 @@ import {
   Component,
   computed,
   effect,
+  ElementRef,
   input,
   output,
   signal,
+  viewChild,
 } from '@angular/core';
+
+export interface TimeLineNumberEvent {
+  selectedNumber: number;
+  timeLineWidth: number;
+}
 
 @Component({
   selector: 'app-time-line',
@@ -29,7 +36,11 @@ export class TimeLineComponent {
   markers = signal<number[]>([]);
   indicators = signal<number[]>([]);
 
-  numberSelected = output<number>();
+  timeLine = viewChild('timeLine', {
+    read: ElementRef,
+  });
+
+  numberSelected = output<TimeLineNumberEvent>();
 
   constructor() {
     effect(() => {
@@ -65,17 +76,19 @@ export class TimeLineComponent {
   }
 
   timelineClicked(clickEvent: MouseEvent) {
-    if (!this.timelineEnabled()) {
+    const timeLineElement = <HTMLDivElement>this.timeLine()?.nativeElement;
+
+    if (!this.timelineEnabled() || !timeLineElement) {
       return;
     }
 
-    const timeLineElement = <HTMLDivElement>clickEvent.currentTarget;
-    const timeLineOffsetLeft = timeLineElement.offsetLeft;
+    const boundingRect = timeLineElement.getBoundingClientRect();
+
+    const timeLineOffsetLeft = boundingRect.left;
     const clickEventOffsetLeft = clickEvent.clientX;
 
-    const clickOnTimeLine =
-      clickEventOffsetLeft - timeLineOffsetLeft;
-    
+    const clickOnTimeLine = clickEventOffsetLeft - timeLineOffsetLeft;
+
     const timeLineWidth = timeLineElement.clientWidth;
 
     const clickPercent = clickOnTimeLine / timeLineWidth;
@@ -83,6 +96,9 @@ export class TimeLineComponent {
 
     const fixedValue = Math.max(Math.min(clickedValue, this.max()), this.min());
 
-    this.numberSelected.emit(fixedValue);
+    this.numberSelected.emit({
+      selectedNumber: fixedValue,
+      timeLineWidth
+    });
   }
 }

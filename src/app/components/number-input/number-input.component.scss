@@ -1,11 +1,16 @@
 .number-input-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    gap: 1em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 1em;
 
-    .confirm-valid {
-        color: #077a07;
-    }
+  .flag-icon {
+    display: block;
+    width: 30px;
+  }
+
+  .confirm-valid {
+    color: #077a07;
+  }
 }

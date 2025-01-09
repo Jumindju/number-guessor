@@ -1,22 +1,19 @@
-<div class="time-line-container">
-  <div class="time-line" (click)="timelineClicked($event)">
-    <div class="line"></div>
+<div #timeLine class="time-line" (click)="timelineClicked($event)">
+  <div class="line"></div>
 
-    @for (marker of markers(); track marker) {
-    <div
-      class="marker"
-      [style.left]="(marker / max()) * 100 + '%'"
-      [attr.marker-value]="marker | number : '1.0-0'"
-    ></div>
-    }
-
-    @for (indicator of indicators(); track indicator; let i = $index) {
-        <div
-             class="indicator" 
-             [class.indicator-highlighted]="i % (indicatorPerMarker()! - 1) === indicatorMid()"
-             [style.left]="indicator + '%'"
-        ></div>
-    }
-
-  </div>
+  @for (marker of markers(); track marker) {
+  <div
+    class="marker"
+    [style.left]="(marker / max()) * 100 + '%'"
+    [attr.marker-value]="marker | number : '1.0-0'"
+  ></div>
+  } @for (indicator of indicators(); track indicator; let i = $index) {
+  <div
+    class="indicator"
+    [class.indicator-highlighted]="
+      i % (indicatorPerMarker()! - 1) === indicatorMid()
+    "
+    [style.left]="indicator + '%'"
+  ></div>
+  }
 </div>

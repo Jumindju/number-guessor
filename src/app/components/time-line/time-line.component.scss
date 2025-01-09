@@ -2,52 +2,49 @@ $baseSize: 12px;
 $lineHeight: 2px;
 $markerHeight: 2 * $baseSize + $lineHeight;
 
-.time-line-container {
-    padding: 5vw;
+.time-line {
+  position: relative;
+  width: 100%;
+  height: calc($markerHeight + $baseSize + 1em);
 
-    .time-line {
-        position: relative;
-        width: 100%;
-        height: $markerHeight;
-
-        .line {
-            &::after {
-                position: absolute;
-                content: "";
-                width: 100%;
-                height: $lineHeight;
-                background-color: black;
-                top: $baseSize;
-                left: 0;
-            }
-        }
-
-        .marker {
-            position: absolute;
-            top: 0;
-            width: 1px;
-            height: calc($markerHeight);
-            background-color: black;
-
-            &::after {
-                position: absolute;
-                content: attr(marker-value);
-                top: calc($markerHeight + $baseSize);
-                translate: -50%;
-            }
-        }
-
-        .indicator {
-            position: absolute;
-            width: 1px;
-            height: $baseSize;
-            top: calc(($markerHeight - $baseSize) / 2);
-            background-color: black;
-
-            &-highlighted {
-                height: calc($baseSize * 1.5);
-                top: calc(($markerHeight - (1.5 * $baseSize)) / 2);
-            }
-        }
+  .line {
+    &::after {
+      position: absolute;
+      content: "";
+      width: 100%;
+      height: $lineHeight;
+      background-color: black;
+      top: $baseSize;
+      left: 0;
     }
+  }
+
+  .marker {
+    position: absolute;
+    top: 0;
+    width: 1px;
+    height: calc($markerHeight);
+    background-color: black;
+
+    &::after {
+      position: absolute;
+      content: attr(marker-value);
+      top: calc($markerHeight + $baseSize);
+      translate: -50%;
+      font-size: 1em;
+    }
+  }
+
+  .indicator {
+    position: absolute;
+    width: 1px;
+    height: $baseSize;
+    top: calc(($markerHeight - $baseSize) / 2);
+    background-color: black;
+
+    &-highlighted {
+      height: calc($baseSize * 1.5);
+      top: calc(($markerHeight - (1.5 * $baseSize)) / 2);
+    }
+  }
 }

@@ -21,14 +21,26 @@
           [class.number-display-hidden]="currentGuess() !== null"
         />
       </div>
-      <app-time-line
+
+      <div class="time-line-wrapper">
+        <app-time-line
         [min]="minValue()"
         [max]="maxValue()"
         [timelineEnabled]="currentNumber() !== null"
         [markerCount]="10"
         [indicatorPerMarker]="10"
-        (numberSelected)="numberSelected($event)"
+        (numberSelected)="guessSelected($event)"
       />
+
+      @if (currentGuess() !== null) {
+        <app-flag
+          [sizePx]="90"
+          [content]="currentNumber()"
+          class="user-guess-flag"
+          [style.left]="currentGuessOffset() - 2.5 + 'px'"
+        />
+      }
+      </div>
     </div>
 
     @if(currentNumber() === null){
